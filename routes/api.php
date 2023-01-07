@@ -2,6 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Musica;
+use App\Models\Imagem;
+use App\Models\Video;
+use App\Models\Artista;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +20,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('musicas',function(){
+    $musicas = Musica::all();
+    return compact('musicas');
+});
+Route::get('artistas',function(){
+    $artista = Artista::all();
+    return $artista;
+});
+Route::get('videos',function(){
+    $videos = Video::all();
+    return $videos;
+});
+Route::get('galeria',function(){
+    $img = Imagem::all();
+    return $img;
 });

@@ -1,0 +1,50 @@
+*{
+
+}
+.topmenu{
+    border-bottom: 1px solid rgba(105, 105, 105, 0.321);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.control{
+    display: flex;
+    width: 100%;
+}
+.ladoMenu{
+    width:16% ;
+    border-right: 1px solid rgba(105, 105, 105, 0.308);
+    height: 100vh;
+}
+.dash{
+    background-color: black;    
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+}
+.dash h4{
+    color: white;
+}
+.menus{
+    list-style: none;
+    padding-left: 12px;
+}
+.menus li{
+    margin-top: 20px;
+}
+.menus li:hover{
+    margin-top: 20px;
+}
+.menus li a{
+    color: dimgray;
+    text-decoration: none;
+
+}
+.conteudo{
+    width: 84%;
+    padding: 20px;
+}
+#topCard{
+    display: flex;
+    justify-content: space-between;
+}
