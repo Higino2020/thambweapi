@@ -43,7 +43,7 @@ class MusicaController extends Controller
                 $media = MediaUploader::fromSource(request()->file('file'))
                     ->toDirectory('musica')->onDuplicateIncrement()
                     ->useHashForFilename()
-                    ->setAllowedAggregateTypes(['image'])->upload();
+                    ->setAllowedAggregateTypes(['audio'])->upload();
                 $musica->file = $media->basename;
             }
             if (request()->hasFile('capa')) {

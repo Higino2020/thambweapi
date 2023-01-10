@@ -2,6 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 use Plank\Mediable\Facades\MediaUploader;
+use Plank\Mediable\Media;
+use Intervention\Image\Facades\Image;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\{
+    MusicaController,
+    ArtistaController,
+    ImagemController
+};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +57,9 @@ Route::get('/', function () {
 Route::get('musicas',function(){
     return view('admin.musicas');
 })->name('musica');
+Route::post('musica',[MusicaController::class,'store'])->name('musica.store');
+Route::post('artista',[ArtistaController::class,'store'])->name('artista.store');
+Route::post('galeria',[ImagemController::class,'store'])->name('galeria.store');
 
 Route::get('videos',function(){
     return view('admin.videos');

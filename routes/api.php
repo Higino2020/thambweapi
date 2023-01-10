@@ -26,15 +26,19 @@ Route::get('musicas',function(){
     $musicas = Musica::all();
     return compact('musicas');
 });
+Route::get('musicas/destaque',function(){
+    $musicas = Musica::orderBy('id','DESC')->limit(6)->get();
+    return compact('musicas');
+});
 Route::get('artistas',function(){
     $artista = Artista::all();
-    return $artista;
+    return compact('artista');
 });
 Route::get('videos',function(){
     $videos = Video::all();
-    return $videos;
+    return compact('videos');
 });
 Route::get('galeria',function(){
     $img = Imagem::all();
-    return $img;
+    return compact('img');
 });
