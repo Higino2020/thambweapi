@@ -26,6 +26,10 @@ Route::get('musicas',function(){
     $musicas = Musica::all();
     return compact('musicas');
 });
+Route::get('musicas/{nome}',function($nome){
+    $musicas = Musica::where('titulo','like','%'.$nome.'%')->get();
+    return compact('musicas');
+});
 Route::get('musicas/destaque',function(){
     $musicas = Musica::orderBy('id','DESC')->limit(6)->get();
     return compact('musicas');
