@@ -51,25 +51,31 @@ Route::get('getfile/{name}', function ($name,  Request $r) {
     return (new Response($img->__toString(), 200))
         ->header('Content-Type', 'image/jpeg');
 });
-Route::get('/', function () {
-    return view('admin.index');
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/', function () {
+        return view('admin.index');
+    });
+    Route::get('musicas',function(){
+        return view('admin.musicas');
+    })->name('musica');
+    Route::post('musica',[MusicaController::class,'store'])->name('musica.store');
+    Route::post('artista',[ArtistaController::class,'store'])->name('artista.store');
+    Route::post('galeria',[ImagemController::class,'store'])->name('galeria.store');
+    
+    Route::get('videos',function(){
+        return view('admin.videos');
+    })->name('video');
+    
+    Route::get('galerias',function(){
+        return view('admin.galeria');
+    })->name('galeria');
+    
+    Route::get('musicos',function(){
+        return view('admin.musico');
+    })->name('musico');
 });
-Route::get('musicas',function(){
-    return view('admin.musicas');
-})->name('musica');
-Route::post('musica',[MusicaController::class,'store'])->name('musica.store');
-Route::post('artista',[ArtistaController::class,'store'])->name('artista.store');
-Route::post('galeria',[ImagemController::class,'store'])->name('galeria.store');
 
-Route::get('videos',function(){
-    return view('admin.videos');
-})->name('video');
 
-Route::get('galerias',function(){
-    return view('admin.galeria');
-})->name('galeria');
+Auth::routes();
 
-Route::get('musicos',function(){
-    return view('admin.musico');
-})->name('musico');
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

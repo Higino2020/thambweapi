@@ -14,7 +14,13 @@
         <h4>Thambwe</h4>
         <div class="">
             <i class="fas fa-user-circle" aria-hidden="true"></i>
-            <i class="fas fa-power-off" aria-hidden="true"></i>
+            <a  href="{{ route('logout') }}" onclick="event.preventDefault();   document.getElementById('logout-form').submit();">
+                <i class="fas fa-power-off" aria-hidden="true"></i>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+            
         </div>
     </div>
     <div class="control">
@@ -25,6 +31,8 @@
             <div>
                 <ul class="menus">
                     <li><a href="{{url('/')}}">Inicio</a></li>
+                    <li><a href="{{route('musica')}}">Volumes</a></li>
+                    <li><a href="{{route('musica')}}">Fitas</a></li>
                     <li><a href="{{route('musica')}}">Musicas</a></li>
                     <li><a href="{{route('video')}}">Vidoes</a></li>
                     <li><a href="{{route('galeria')}}">Galeria</a></li>

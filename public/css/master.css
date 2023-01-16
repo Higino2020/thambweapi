@@ -1,20 +1,20 @@
-*{
-
-}
 .topmenu{
     border-bottom: 1px solid rgba(105, 105, 105, 0.321);
     padding: 10px;
     display: flex;
     justify-content: space-between;
+    background-color:#776BCC	
 }
 .control{
     display: flex;
     width: 100%;
+   
 }
 .ladoMenu{
     width:16% ;
     border-right: 1px solid rgba(105, 105, 105, 0.308);
     height: 100vh;
+    background-color: #C7C5F4;
 }
 .dash{
     background-color: black;    
@@ -47,4 +47,8 @@
 #topCard{
     display: flex;
     justify-content: space-between;
+}
+.bts{
+    color: rgba(158, 158, 158, 0.598);
+    font-size: 14pt;
 }
