@@ -14,6 +14,9 @@ use App\Http\Controllers\{
     ArtistaController,
     ImagemController
 };
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +27,18 @@ use App\Http\Controllers\{
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('getStream/{param}', function (Request $req, $param) {
+    $m = Media::whereBasename($param)->first();
+
+    $path = $m->getAbsolutePath();
+
+    $response = new BinaryFileResponse($path);
+    BinaryFileResponse::trustXSendfileTypeHeader();
+
+    return $response;
+});
+
 Route::get('getfile/{name}', function ($name,  Request $r) {
     $path = '';
     $media = Media::whereBasename($name)->first();
@@ -54,22 +69,24 @@ Route::get('getfile/{name}', function ($name,  Request $r) {
 Route::get('/', function () {
     return view('admin.index');
 });
-Route::get('musicas',function(){
+Route::get('musicas', function () {
     return view('admin.musicas');
 })->name('musica');
-Route::post('musica',[MusicaController::class,'store'])->name('musica.store');
-Route::post('artista',[ArtistaController::class,'store'])->name('artista.store');
-Route::post('galeria',[ImagemController::class,'store'])->name('galeria.store');
+Route::post('musica', [MusicaController::class, 'store'])->name('musica.store');
+Route::post('artista', [ArtistaController::class, 'store'])->name('artista.store');
+Route::post('galeria', [ImagemController::class, 'store'])->name('galeria.store');
 
-Route::get('videos',function(){
+Route::get('videos', function () {
     return view('admin.videos');
 })->name('video');
 
-Route::get('galerias',function(){
+Route::get('galerias', function () {
     return view('admin.galeria');
 })->name('galeria');
 
-Route::get('musicos',function(){
+Route::get('musicos', function () {
     return view('admin.musico');
 })->name('musico');
 
+
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
