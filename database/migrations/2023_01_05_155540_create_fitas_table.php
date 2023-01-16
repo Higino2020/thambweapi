@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('musicas', function (Blueprint $table) {
+        Schema::create('fitas', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->string('autor');
-            $table->string('file');
-            $table->string('capa')->nullable();
-            $table->integer('ano')->nullable();
-            $table->foreignId('fita_id')->constrant('fitas');
+            $table->string('nome');
+            $table->foreignId('volumes_id')->constrant('volumess');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('musicas');
+        Schema::dropIfExists('fitas');
     }
 };

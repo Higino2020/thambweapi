@@ -15,6 +15,7 @@
                         <th>Titulo</th>
                         <th>Autor</th>
                         <th>Ano</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +28,10 @@
                             <td>{{$item->titulo}}</td>
                             <td>{{$item->autor}}</td>
                             <td>{{$item->ano}}</td>
+                            <td>
+                                <a href="" class="bts"><i class="fas fa-edit"></i></a>
+                                <a href="" class="bts"><i class="fas fa-trash"></i></a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -69,9 +74,17 @@
                             <label for="" class="mb-2">Ano de Produção</label>
                             <input type="number" name="ano" placeholder="ano de produção" class="form-control">
                         </div>
+                        <div class="col-6">
+                            <label for="" class="mb-2">Fita</label>
+                            <select name="fita_id" id="" class="form-control">
+                                @foreach (App\Models\Fita::all() as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nome }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group" style="display: flex; justify-content: end;">
-                        <button class="btn btn-success" type="submit">Enviar</button>
+                        <button class="btn btn-success" type="submit">Cadastrar</button>
                     </div>
                 </form>
             </div>
