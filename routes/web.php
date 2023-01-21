@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\{
     MusicaController,
     ArtistaController,
-    ImagemController
+    ImagemController,
+    VolumeController,
+    FitaController
 };
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -73,6 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('musicas', function () {
         return view('admin.musicas');
     })->name('musica');
+    
     Route::post('musica', [MusicaController::class, 'store'])->name('musica.store');
     Route::post('artista', [ArtistaController::class, 'store'])->name('artista.store');
     Route::post('galeria', [ImagemController::class, 'store'])->name('galeria.store');
@@ -88,25 +91,40 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('musicos', function () {
         return view('admin.musico');
     })->name('musico');
+
+    Route::get('musicas', function () {
+        return view('admin.musicas');
+    })->name('musica');
+
+    Route::post('musica', [MusicaController::class, 'store'])->name('musica.store');
+    Route::post('artista', [ArtistaController::class, 'store'])->name('artista.store');
+    Route::post('galeria', [ImagemController::class, 'store'])->name('galeria.store');
+    Route::post('volume', [VolumeController::class, 'store'])->name('volume.store');
+    Route::get('volume/{id}', [VolumeController::class, 'show'])->name('volume.show');
+    Route::post('fita', [FitaController::class, 'store'])->name('fita.store');
+    Route::get('fita/{id}', [FitaController::class, 'show'])->name('fita.show');
+    
+    Route::get('videos', function () {
+        return view('admin.videos');
+    })->name('video');
+    
+    Route::get('galerias', function () {
+        return view('admin.galeria');
+    })->name('galeria');
+    
+    Route::get('musicos', function () {
+        return view('admin.musico');
+    })->name('musico');
+
+    Route::get('volume',function(){
+        return view('admin.volumes');
+    })->name('volume');
+
+    Route::get('fita',function(){
+        return view('admin.fita');
+    })->name('fita');
+
 });
-Route::get('musicas', function () {
-    return view('admin.musicas');
-})->name('musica');
-Route::post('musica', [MusicaController::class, 'store'])->name('musica.store');
-Route::post('artista', [ArtistaController::class, 'store'])->name('artista.store');
-Route::post('galeria', [ImagemController::class, 'store'])->name('galeria.store');
-
-Route::get('videos', function () {
-    return view('admin.videos');
-})->name('video');
-
-Route::get('galerias', function () {
-    return view('admin.galeria');
-})->name('galeria');
-
-Route::get('musicos', function () {
-    return view('admin.musico');
-})->name('musico');
 
 
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);

@@ -35,7 +35,8 @@ class FitaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Fita::create($request->except('_token'));
+        return redirect()->back();
     }
 
     /**

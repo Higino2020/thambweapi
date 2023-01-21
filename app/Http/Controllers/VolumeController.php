@@ -35,7 +35,8 @@ class VolumeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Volume::create($request->except('_token'));
+        return redirect()->back();
     }
 
     /**
@@ -44,9 +45,12 @@ class VolumeController extends Controller
      * @param  \App\Models\Volume  $volume
      * @return \Illuminate\Http\Response
      */
-    public function show(Volume $volume)
+    public function show($volume)
     {
-        //
+       
+        Volume::find($volume)->delete();
+        return redirect()->back();
+
     }
 
     /**

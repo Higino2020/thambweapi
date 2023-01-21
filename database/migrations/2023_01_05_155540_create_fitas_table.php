@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('fitas', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
+            $table->string('numero');
             $table->foreignId('volumes_id')->constrant('volumess');
             $table->timestamps();
         });

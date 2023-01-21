@@ -31,8 +31,8 @@
             <div>
                 <ul class="menus">
                     <li><a href="{{url('/')}}">Inicio</a></li>
-                    <li><a href="{{route('musica')}}">Volumes</a></li>
-                    <li><a href="{{route('musica')}}">Fitas</a></li>
+                    <li><a href="{{route('volume')}}">Volumes</a></li>
+                    <li><a href="{{route('fita')}}">Fitas</a></li>
                     <li><a href="{{route('musica')}}">Musicas</a></li>
                     <li><a href="{{route('video')}}">Vidoes</a></li>
                     <li><a href="{{route('galeria')}}">Galeria</a></li>
