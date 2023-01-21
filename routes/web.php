@@ -97,8 +97,11 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('musica');
 
     Route::post('musica', [MusicaController::class, 'store'])->name('musica.store');
+    Route::get('musica/{id}', [MusicaController::class, 'show'])->name('musica.show');
     Route::post('artista', [ArtistaController::class, 'store'])->name('artista.store');
+    Route::get('artista/{id}', [ArtistaController::class, 'show'])->name('artista.show');
     Route::post('galeria', [ImagemController::class, 'store'])->name('galeria.store');
+    Route::get('galeria/{id}', [ImagemController::class, 'show'])->name('galeria.show');
     Route::post('volume', [VolumeController::class, 'store'])->name('volume.store');
     Route::get('volume/{id}', [VolumeController::class, 'show'])->name('volume.show');
     Route::post('fita', [FitaController::class, 'store'])->name('fita.store');

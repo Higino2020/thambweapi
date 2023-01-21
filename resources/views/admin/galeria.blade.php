@@ -14,6 +14,7 @@
                         <th>#</th>
                         <th>Titulo</th>
                         <th>Ano</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +28,10 @@
                             </td>
                             <td>{{$item->titulo}}</td>
                             <td>{{$item->ano}}</td>
+                            <td>
+                                <a href="" class="bts"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('galeria.show',$item->id) }}" class="bts"><i class="fas fa-trash"></i></a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

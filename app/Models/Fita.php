@@ -10,6 +10,6 @@ class Fita extends Model
     use HasFactory;
     protected $fillable=['nome','volumes_id'];
     public function volume(){
-        return $this->blongsTo('App\Models\Volume','volumes_id','id');
+        return $this->belongsTo('App\Models\Volume','volumes_id','id');
     }
 }

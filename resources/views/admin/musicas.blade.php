@@ -15,6 +15,8 @@
                         <th>Titulo</th>
                         <th>Autor</th>
                         <th>Ano</th>
+                        <th>Volume</th>
+                        <th>Fita</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -28,9 +30,11 @@
                             <td>{{$item->titulo}}</td>
                             <td>{{$item->autor}}</td>
                             <td>{{$item->ano}}</td>
+                            <td>{{$item->fita->volume->titulo}}</td>
+                            <td>{{$item->fita->nome}}</td>
                             <td>
                                 <a href="" class="bts"><i class="fas fa-edit"></i></a>
-                                <a href="" class="bts"><i class="fas fa-trash"></i></a>
+                                <a href="{{ route('musica.show',$item->id) }} " class="bts"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                     @endforeach

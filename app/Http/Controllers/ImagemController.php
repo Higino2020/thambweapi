@@ -58,9 +58,10 @@ class ImagemController extends Controller
      * @param  \App\Models\Imagem  $imagem
      * @return \Illuminate\Http\Response
      */
-    public function show(Imagem $imagem)
+    public function show($imagem)
     {
-        //
+        Imagem::find($imagem)->delete();
+        return redirect()->back();
     }
 
     /**

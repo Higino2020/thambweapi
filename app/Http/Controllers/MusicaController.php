@@ -56,6 +56,7 @@ class MusicaController extends Controller
             $musica->titulo = $request->titulo;
             $musica->autor = $request->autor;
             $musica->ano = $request->ano;
+            $musica->fita_id = $request->fita_id;
             $musica->save();
             return redirect()->back();
     }
@@ -66,9 +67,10 @@ class MusicaController extends Controller
      * @param  \App\Models\Musica  $musica
      * @return \Illuminate\Http\Response
      */
-    public function show(Musica $musica)
+    public function show($musica)
     {
-        //
+        Musica::find($musica)->delete();
+        return redirect()->back();
     }
 
     /**

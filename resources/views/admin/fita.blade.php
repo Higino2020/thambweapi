@@ -27,7 +27,7 @@
                             <td>{{$item->nome}}</td>
                             <td>{{$item->volume->titulo}}</td>
                             <td>
-                                <a href="{{ route('fita.show') }}" class="bts"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('fita.show',$item->id) }}" class="bts"><i class="fas fa-edit"></i></a>
                                 <a href="" class="bts"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>

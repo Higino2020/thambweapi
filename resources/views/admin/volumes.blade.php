@@ -25,7 +25,7 @@
                             <td>{{$i++}}</td>
                             <td>{{$item->titulo}}</td>
                             <td>
-                                <a href="{{ route('volume.show') }}" class="bts"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('volume.show',$item->id) }}" class="bts"><i class="fas fa-edit"></i></a>
                                 <a href="" class="bts"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>

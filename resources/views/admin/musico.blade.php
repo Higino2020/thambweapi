@@ -14,6 +14,7 @@
                         <th>#</th>
                         <th>Autor</th>
                         <th>Descrição</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,6 +26,10 @@
                             <td>{{$i}}</td>
                             <td>{{$item->autor}}</td>
                             <td>{{$item->descricao}}</td>
+                            <td>
+                                <a href="" class="bts"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('artista.show',$item->id) }}" class="bts"><i class="fas fa-trash"></i></a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

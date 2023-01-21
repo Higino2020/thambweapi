@@ -59,9 +59,10 @@ class ArtistaController extends Controller
      * @param  \App\Models\Artista  $artista
      * @return \Illuminate\Http\Response
      */
-    public function show(Artista $artista)
+    public function show($artista)
     {
-        //
+        Artista::find($artista)->delete();
+        return redirect()->back();
     }
 
     /**
