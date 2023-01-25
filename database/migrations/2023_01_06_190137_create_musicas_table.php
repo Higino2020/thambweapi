@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('musicas', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->string('autor');
+            $table->string('autor')->nullable();
             $table->string('file');
             $table->string('capa')->nullable();
             $table->integer('ano')->nullable();

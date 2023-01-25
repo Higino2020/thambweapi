@@ -6,6 +6,7 @@ use App\Models\Musica;
 use App\Models\Imagem;
 use App\Models\Video;
 use App\Models\Artista;
+use App\Models\Volume;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +46,8 @@ Route::get('videos', function () {
 Route::get('galeria', function () {
     $img = Imagem::all();
     return compact('img');
+});
+
+Route::get('volumes', function () {
+    return Volume::with('fitas.musicas')->get();
 });

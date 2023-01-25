@@ -6,6 +6,7 @@ use App\Models\Musica;
 use Illuminate\Http\Request;
 use Plank\Mediable\Media;
 use Plank\Mediable\Facades\MediaUploader;
+use Illuminate\Support\Facades\Log;
 
 class MusicaController extends Controller
 {
@@ -37,28 +38,33 @@ class MusicaController extends Controller
      */
     public function store(Request $request)
     {
-            $musica = new Musica();
-          
-            if (request()->hasFile('file')) {
-                $media = MediaUploader::fromSource(request()->file('file'))
-                    ->toDirectory('musica')->onDuplicateIncrement()
-                    ->useHashForFilename()
-                    ->setAllowedAggregateTypes(['audio'])->upload();
-                $musica->file = $media->basename;
-            }
-            if (request()->hasFile('capa')) {
-                $media = MediaUploader::fromSource(request()->file('capa'))
-                    ->toDirectory('musica')->onDuplicateIncrement()
-                    ->useHashForFilename()
-                    ->setAllowedAggregateTypes(['image'])->upload();
-                $musica->capa = $media->basename;
-            }
-            $musica->titulo = $request->titulo;
-            $musica->autor = $request->autor;
-            $musica->ano = $request->ano;
-            $musica->fita_id = $request->fita_id;
-            $musica->save();
-            return redirect()->back();
+        $musica = new Musica();
+
+        Log::debug(request()->all());
+
+        if (request()->hasFile('ficheiro')) {
+            $media = MediaUploader::fromSource(request()->file('ficheiro'))
+                ->toDirectory('musica')->onDuplicateIncrement()
+                ->useHashForFilename()
+                //->setAllowedAggregateTypes(['audio'])
+                ->upload();
+            Log::debug($media);
+
+            $musica->file = $media->basename;
+        }
+        if (request()->hasFile('capa')) {
+            $media = MediaUploader::fromSource(request()->file('capa'))
+                ->toDirectory('musica')->onDuplicateIncrement()
+                ->useHashForFilename()
+                ->setAllowedAggregateTypes(['image'])->upload();
+            $musica->capa = $media->basename;
+        }
+        $musica->titulo = $request->titulo;
+        $musica->autor = $request->autor;
+        $musica->ano = $request->ano;
+        $musica->fita_id = $request->fita_id;
+        $musica->save();
+        return redirect()->back();
     }
 
     /**
