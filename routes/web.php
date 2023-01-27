@@ -12,10 +12,14 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\{
     MusicaController,
     ArtistaController,
+    Controller,
     ImagemController,
     VolumeController,
     FitaController
 };
+use App\Models\Fita;
+use App\Models\Musica;
+use App\Models\Volume;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
@@ -75,7 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('musicas', function () {
         return view('admin.musicas');
     })->name('musica');
-    
+
     Route::post('musica', [MusicaController::class, 'store'])->name('musica.store');
     Route::post('artista', [ArtistaController::class, 'store'])->name('artista.store');
     Route::post('galeria', [ImagemController::class, 'store'])->name('galeria.store');
@@ -106,32 +110,87 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('volume/{id}', [VolumeController::class, 'show'])->name('volume.show');
     Route::post('fita', [FitaController::class, 'store'])->name('fita.store');
     Route::get('fita/{id}', [FitaController::class, 'show'])->name('fita.show');
-    
+
     Route::get('videos', function () {
         return view('admin.videos');
     })->name('video');
-    
+
     Route::get('galerias', function () {
         return view('admin.galeria');
     })->name('galeria');
-    
+
     Route::get('musicos', function () {
         return view('admin.musico');
     })->name('musico');
 
-    Route::get('volume',function(){
+    Route::get('volume', function () {
         return view('admin.volumes');
     })->name('volume');
 
-    Route::get('fita',function(){
+    Route::get('fita', function () {
         return view('admin.fita');
     })->name('fita');
-
 });
 
 
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
+Route::get('loadMusicas', function () {
+    $volumes = Storage::disk('public')->directories('conteudo');
+
+    foreach ($volumes as $volume) {
+        //Cadastrar directorios. Cada directório é um volume
+        $vol = Volume::whereTitulo(Controller::getName($volume))->first();
+        if ($vol == null) {
+            $vol = new Volume();
+        }
+        $vol->titulo = Controller::getName($volume);
+        $vol->save();
+
+        $fitas = Storage::disk('public')->directories($volume);
+
+
+        foreach ($fitas as $fita) {
+            //Cadastrar cada uma das fitas
+            $fit = Fita::whereNome(Controller::getName($fita))->first();
+            if ($fit == null) {
+                $fit = new Fita();
+            }
+            $fit->nome = Controller::getName($fita);
+            $fit->volumes_id = $vol->id;
+            $fit->save();
+
+            $musicas = Storage::disk('public')->files($fita);
+
+            foreach ($musicas as $musica) {
+                //cadastrar cada uma das músicas
+                $mus = Musica::whereTitulo(Controller::getName($musica))->first();
+                if ($mus == null) {
+                    $mus = new Musica();
+
+                    $mus->titulo = Controller::getName($musica);
+                    $mus->fita_id = $fit->id;
+
+
+                    $media = MediaUploader::fromSource(storage_path() . '/app/public/' . $musica)
+                        ->toDirectory('processed_files')->onDuplicateIncrement()
+                        ->useHashForFilename()
+                        //->setAllowedAggregateTypes(['audio'])
+                        ->upload();
+                    Log::debug($media);
+
+                    $mus->file = $media->basename;
+                    $mus->save();
+                }
+
+                //var_dump($musica);
+                //return ['msg' => 'All done'];
+            }
+        }
+    }
+    //return $files;
+    return ['msg' => 'All done'];
+});
 
 Auth::routes();
 
